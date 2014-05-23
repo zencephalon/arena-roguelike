@@ -2,9 +2,18 @@ require 'io/console'
 
 
 class Arena
-  MAP = "######\n#    #\n#    #\n#    #\n######"
+  def initialize(x = 40, y = 12)
+    @x = x
+    @y = y
+  end
 
-
+  def render(x, y)
+    str = "#" * x
+    (y - 2).times do
+      str << "#" + " " * (x - 2) + "#"
+    end
+    str << "#" * x
+  end
 end
 
 
