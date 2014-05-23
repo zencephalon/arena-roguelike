@@ -1,26 +1,12 @@
 require 'io/console'
 
-def read_char
-  STDIN.echo = false
-  STDIN.raw!
-
-  input = STDIN.getc.chr
-  if input == "\e" then
-    input << STDIN.read_nonblock(3) rescue nil
-    input << STDIN.read_nonblock(2) rescue nil
-  end
-ensure
-  STDIN.echo = true
-  STDIN.cooked!
-
-  return input
-end 
 
 class Arena
   MAP = "######\n#    #\n#    #\n#    #\n######"
 
 
 end
+
 
 class Renderer
   def initialize
@@ -45,7 +31,35 @@ class Renderer
   end
 end
 
-r = Renderer.new
-r.render
-puts "hello"
-r.render
+class Game
+  def initialize
+    @renderer = Renderer.new
+    run
+  end
+
+  def run
+    while true
+      # take input
+      # modify game state
+      @renderer.render
+    end
+  end
+
+  def read_char
+    STDIN.echo = false
+    STDIN.raw!
+
+    input = STDIN.getc.chr
+    if input == "\e" then
+      input << STDIN.read_nonblock(3) rescue nil
+      input << STDIN.read_nonblock(2) rescue nil
+    end
+  ensure
+    STDIN.echo = true
+    STDIN.cooked!
+
+    return input
+  end 
+end
+
+game = Game.new
