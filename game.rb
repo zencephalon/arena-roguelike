@@ -2,25 +2,25 @@ require 'io/console'
 
 
 class Arena
-  def initialize(x = 40, y = 12)
-    @x = x
-    @y = y
+  def initialize(width = 20, height = 12)
+    @width = width
+    @height = height
   end
 
-  def render(x, y)
-    str = "#" * x
-    (y - 2).times do
-      str << "#" + " " * (x - 2) + "#"
+  def render
+    str = "#" * @width
+    (@height - 2).times do
+      str << "#" + " " * (@width - 2) + "#"
     end
-    str << "#" * x
+    str << "#" * @width
   end
 end
 
 
 class Renderer
   def initialize
-    @x = 80
-    @y = 24
+    @width = 80
+    @height = 24
     @stack = []
   end
 
@@ -31,8 +31,8 @@ class Renderer
   def render
     clear
 
-    (0...@y).each do |y|
-      (0...@x).each do |x|
+    (0...@width).each do |y|
+      (0...@height).each do |x|
         print "·"
       end
       puts
