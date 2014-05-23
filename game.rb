@@ -24,7 +24,7 @@ class Renderer
 
     (0...@y).each do |y|
       (0...@x).each do |x|
-        print "."
+        print "·"
       end
       puts
     end
@@ -41,6 +41,10 @@ class Game
     while true
       # take input
       # modify game state
+      input = read_char
+      if input == 'q'
+        exit
+      end
       @renderer.render
     end
   end
